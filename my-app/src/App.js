@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Form() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+    const [creds, setCreds] = React.useState({
+    email: '',
+    password: '',
+  });
 
   // event handler that controls form’s submission
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const creds = { email, password };
+    console.log(creds)
   };
+
+  useEffect(() => {
+    console.log('useEffect ran')
+    console.log(creds)
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -18,8 +29,7 @@ export default function Form() {
           keyboardType='email-address'
           autoCapitalize='none'
           value={email}
-          onChange={e => 
-            setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           required
         />
         <input
